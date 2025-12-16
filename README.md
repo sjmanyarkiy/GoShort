@@ -7,22 +7,14 @@ A simple and efficient URL shortening service built with Go.
 ### Prerequisites
 - Go 1.19 or higher installed
 - Basic understanding of REST APIs
+- Editor: VS Code
 
 ### Installation
 
 ```bash
-# Clone or create the project
-mkdir go-url-shortener
-cd go-url-shortener
-
-# Initialize Go module
-go mod init goshort
-
-# Create the files (copy the code provided)
-# - main.go
-# - handlers.go
-# - models.go
-# - utils.go
+# Clone the project
+git clone https://github.com/sjmanyarkiy/GoShort.git
+cd Goshort
 
 # Run the server
 go run .
@@ -170,6 +162,7 @@ go-url-shortener/
 ├── utils.go         # Utility functions (code generation, validation)
 ├── go.mod           # Go module file
 └── README.md        # This file
+└── TOOLKIT.md       # Demonstrates use of AI in project
 ```
 
 ## 🔧 How It Works
@@ -229,5 +222,5 @@ This project is open source and available under the MIT License.
 Contributions, issues, and feature requests are welcome!
 
 ---
-
-Built with ❤️ using Go
+## Author
+Built by Sandra Manyarkiy with ❤️ using Go for the "AI Artificial Intelligence" capstone project
