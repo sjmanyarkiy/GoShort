@@ -213,6 +213,11 @@ go build -o goshort
 ./goshort
 ```
 
+## References
+
+Go Documentation [https://go.dev/doc/]
+Moringa School AI Curriculum
+
 ## 📄 License
 
 This project is open source and available under the MIT License.

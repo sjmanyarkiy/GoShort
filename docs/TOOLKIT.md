@@ -1,265 +1,119 @@
-# GoShort - AI Toolkit & Prompt Journal
+# GoShort URL Shortener — Toolkit Document
 
-**Student Name:** Sandra Manyarkiy  
-**Project:** GoShort - URL Shortener API  
-**Technology:** Go (Golang)  
-**Completion Date:** December 16, 2025
+**Student:** [Your Name]  
+**Date:** December 16, 2025
 
 ---
 
-## 📚 AI Tools Used
+## 1) Title & Objective
 
-### Primary Tool: Claude AI (Anthropic)
-- **Purpose:** Code generation, debugging, documentation
-- **Platform:** claude.ai
-- **Model:** Claude Sonnet 4.5
+**Tech:** Go (Golang) + Standard Library  
+**Objective:** Build a minimal REST API for URL shortening to learn Go's backend capabilities and document learning with GenAI.
 
 ---
 
-## 🤖 Prompt Strategy & Journal
+## 2) Quick Summary of the Technology
 
-### Day 1: Project Setup
-
-**Prompt 1: Environment Setup**
-```
-I want to create an application using Go. I have a project plan for a URL 
-shortener. Can you help me set up Go and create the project structure?
-```
-
-**AI Response Summary:**
-- Provided installation instructions for Go
-- Created project structure with 4 files
-- Generated complete boilerplate code
-
-**What I Learned:**
-- How to initialize a Go module with `go mod init`
-- Basic Go project structure
-- Package management in Go
+**Go:** Statically typed, compiled language from Google emphasizing simplicity, fast compilation, and native concurrency (goroutines).  
+**Standard Library:** Built-in `net/http` package provides production-ready HTTP server—no framework needed.  
+**Real-world usage:** Docker, Kubernetes, Terraform all built in Go. Used by Uber, Dropbox, Netflix for high-performance microservices.
 
 ---
 
-### Day 2: Core Development
+## 3) System Requirements
 
-**Prompt 2: Understanding the Code**
-```
-Explain how the URL shortening logic works in the handlers.go file
-```
-
-**Key Concepts Learned:**
-- HTTP handlers in Go
-- JSON encoding/decoding
-- Map-based storage
-- Random string generation
-
-**Prompt 3: Debugging**
-```
-When I run "go run ." I get "expected 'package', found 'EOF'" error
-```
-
-**Solution Applied:**
-- Removed incomplete test.go file
-- Learned about Go's compilation process
-- Fixed project directory structure
+- **OS:** Windows/macOS/Linux
+- **Go:** 1.19+ (via official installer)
+- **Tools:** Terminal, text editor (VS Code recommended)
+- **Testing:** curl or Postman
+- **Dependencies:** None (standard library only)
 
 ---
 
-### Day 3: Testing & Refinement
+## 4) Installation & Setup
 
-**Prompt 4: Testing Strategy**
-```
-Create a comprehensive testing checklist for my URL shortener API
+```bash
+# Install Go (macOS)
+brew install go
+
+# Install Go (Linux)
+wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+
+# Verify
+go version
+
+# Create project
+mkdir go-url-shortener && cd go-url-shortener
+go mod init goshort
+
+# Create files
+touch main.go handlers.go models.go utils.go
+
+# Run server
+go run .
+# Open http://localhost:8080
 ```
 
-**Testing Approach:**
-- Used curl for API testing
-- Tested all endpoints (POST, GET, redirects)
-- Validated error handling
-- Checked edge cases
+---
+
+## 5) Minimal Working Example
+
+### Endpoints:
+- `POST /shorten` → Create short URL `{"url": "https://example.com"}`
+- `GET /:code` → Redirect to original URL
+- `GET /stats/:code` → Get click statistics
+- `GET /list` → List all URLs
+
+### Expected Output:
+
+**Start:** Server running on port 8080
+
+**After POST /shorten:**
+```json
+{
+  "short_code": "aBc123",
+  "short_url": "http://localhost:8080/aBc123",
+  "original_url": "https://example.com"
+}
+```
+
+**GET /list shows:**
+```json
+[{
+  "original_url": "https://example.com",
+  "short_code": "aBc123",
+  "clicks": 0,
+  "created_at": "2025-12-16T20:25:20Z"
+}]
+```
 
 ---
 
-## 🔧 Technical Challenges & Solutions
+## 6) AI Prompt Journal
 
-### Challenge 1: Understanding Go Syntax
-**Problem:** Coming from JavaScript background, Go syntax was different  
-**Solution:** AI explained key differences:
-- Statically typed vs dynamically typed
-- Explicit error handling (no try-catch)
-- Pointers and memory management
+See docs/ai-prompt-journal.md for full prompts, response summaries, and reflections.
 
-### Challenge 2: HTTP Server Setup
-**Problem:** Didn't know how to set up HTTP server in Go  
-**Solution:** AI provided complete server code with:
-- Route handlers
-- Middleware concepts
-- Request/response handling
+## 7) Common Issues & Fixes
 
-### Challenge 3: Data Storage
-**Problem:** How to store URLs without a database  
-**Solution:** Used in-memory map structure
-- `var urlStore = make(map[string]*URLMapping)`
-- Fast lookups with O(1) complexity
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| `expected 'package', found 'EOF'` | Incomplete .go file in directory | Remove test files: `rm test.go` |
+| `address already in use` | Port 8080 occupied | Kill process: `lsof -i :8080` then `kill -9 <PID>`, or change port |
+| `cannot find package` | Missing import statement | Add to imports: `import "net/url"` |
+| JSON not parsing | Missing Content-Type header | Add `-H "Content-Type: application/json"` to curl |
+| Redirect shows JSON error | Short code doesn't exist | Verify short_code from POST response before GET |
+| Module not found | Not in project directory | Ensure in folder with go.mod: `cd goshort` |
+| Code changes not reflected | Old process still running | Stop server (Ctrl+C) and restart with `go run .` |
 
 ---
 
-## 💡 Key Learnings
+## 8) References
 
-### Go-Specific Concepts
 
-1. **Structs vs Classes**
-   - Go uses structs instead of classes
-   - Methods can be attached to structs
-   - JSON tags for serialization
+- [Go Official Site](https://go.dev/) — Installation, tutorials, documentation
+- [Go Tour](https://go.dev/tour/) — Interactive learning
+- [Effective Go](https://go.dev/doc/effective_go) — Idiomatic Go patterns
+- [Standard Library](https://pkg.go.dev/std) — Package reference
 
-2. **Error Handling**
-   - Explicit error returns
-   - No exceptions in Go
-   - Pattern: `if err != nil { return err }`
-
-3. **HTTP Package**
-   - `net/http` is built-in
-   - Simple handler functions
-   - Minimal framework needed
-
-4. **Concurrency**
-   - Go's built-in HTTP server handles concurrent requests
-   - No explicit thread management needed
-
-### Software Development Principles
-
-1. **API Design**
-   - RESTful endpoint structure
-   - Proper HTTP status codes
-   - JSON request/response format
-
-2. **Code Organization**
-   - Separation of concerns (models, handlers, utils)
-   - Single responsibility principle
-   - Clean file structure
-
-3. **Testing**
-   - Test all happy paths
-   - Test error cases
-   - Document test results
-
----
-
-## 🎯 Effective AI Prompting Techniques
-
-### What Worked Well
-
-1. **Be Specific**
-   - ✅ "Create a POST endpoint in Go that accepts JSON"
-   - ❌ "Help me with Go"
-
-2. **Provide Context**
-   - Share error messages verbatim
-   - Mention your background (JavaScript → Go)
-   - Explain the end goal
-
-3. **Iterative Refinement**
-   - Start with basic implementation
-   - Ask for improvements
-   - Request explanations for unclear parts
-
-4. **Ask for Explanations**
-   - Don't just copy code
-   - Ask "Why does this work?"
-   - Request analogies to familiar concepts
-
-### Prompts That Generated Best Results
-
-1. "Explain [concept] as if I'm coming from JavaScript"
-2. "Show me the idiomatic Go way to [task]"
-3. "What are common mistakes beginners make with [feature]?"
-4. "Create a complete example with error handling"
-
----
-
-## 📊 Project Statistics
-
-- **Lines of Code:** ~250
-- **Files Created:** 6 (4 Go files + README + TOOLKIT)
-- **API Endpoints:** 4
-- **AI Interactions:** ~10 major prompts
-
----
-
-## 🚀 Future Improvements (If I Had More Time)
-
-1. **Database Integration**
-   - Add PostgreSQL or MongoDB
-   - Persist data across restarts
-
-2. **Custom Short Codes**
-   - Let users choose their own codes
-   - Validate availability
-
-3. **Analytics Dashboard**
-   - Web UI for viewing stats
-   - Charts for click trends
-
-4. **Authentication**
-   - User accounts
-   - API key management
-
-5. **Advanced Features**
-   - URL expiration
-   - QR code generation
-   - Rate limiting
-
----
-
-## 🎓 Reflection
-
-### What Went Well
-- AI helped me learn Go syntax quickly
-- Project completed faster than expected
-- Code is clean and well-organized
-- All features work as intended
-
-### What Was Challenging
-- Understanding Go's error handling pattern
-- Different mindset from JavaScript
-- Learning when to use pointers
-
-### How AI Enhanced My Learning
-- Instant feedback on errors
-- Code examples with explanations
-- Best practices and idioms
-- Saved hours of documentation reading
-
-### Skills Gained
-- Go programming fundamentals
-- REST API design
-- HTTP server implementation
-- JSON handling
-- Error management
-- Testing methodologies
-
----
-
-## 📝 Code Quality Checklist
-
-- [x] Code is readable and well-formatted
-- [x] Functions have clear purposes
-- [x] Error handling implemented
-- [x] All endpoints tested
-- [x] Documentation complete
-- [x] No hardcoded values (except port)
-- [x] Proper HTTP status codes used
-- [x] JSON responses formatted correctly
-
----
-
-## 🙏 Acknowledgments
-
-- **Claude AI** for code generation and explanations
-- **Go Documentation** for reference
-- **Project Plan** for structured approach
-
----
-
-**Final Note:** This project demonstrates that AI tools are powerful learning 
-accelerators when used thoughtfully. The key is asking good questions, 
-understanding the responses, and iterating based on results.
