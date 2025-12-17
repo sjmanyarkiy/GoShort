@@ -1,10 +1,5 @@
 # GoShort URL Shortener — Toolkit Document
 
-**Student:** [Your Name]  
-**Date:** December 16, 2025
-
----
-
 ## 1) Title & Objective
 
 **Tech:** Go (Golang) + Standard Library  
