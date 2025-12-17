@@ -215,8 +215,8 @@ go build -o goshort
 
 ## References
 
-Go Documentation [https://go.dev/doc/]
-Moringa School AI Curriculum
+- Go Documentation
+- Moringa School AI Curriculum
 
 ## 📄 License
 
