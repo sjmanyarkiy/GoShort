@@ -162,7 +162,7 @@ go-url-shortener/
 ├── utils.go         # Utility functions (code generation, validation)
 ├── go.mod           # Go module file
 └── README.md        # This file
-└── TOOLKIT.md       # Demonstrates use of AI in project
+└── TOOLKIT.md       # AI usage and tooling notes
 ```
 
 ## 🔧 How It Works

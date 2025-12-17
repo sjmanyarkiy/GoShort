@@ -304,4 +304,4 @@ Please:
 
 ## Author
 
-Built by **Sandra Manyarkiy** as a learning-focused capstone project using Go and AI-assisted guidance.
+Built by **Sandra Manyarkiy** for the Generative AI capstone project using Go and AI-assisted guidance.
